@@ -94,7 +94,7 @@ price_world <- function(x){
 ggplot() +
   labs(x = "Quantity of Good",
        y = "Price of Good ($/good)",
-       title = "Country B with a Border Carbon Adjustment") +
+       title = "Country B with a Border Carbon Adjustment (WILSON)") +
   stat_function(fun = sup, color = "darkolivegreen4") +
   stat_function(fun = dem_2, color = "sienna") +
   stat_function(fun = dem_us, color = "slateblue") +
@@ -102,7 +102,7 @@ ggplot() +
   xlim(0, 100) + ylim(0, 100) +
    geom_text(aes(label = "Q2", x = 25, y = 0), size = 3, angle = -45) +
    geom_text(aes(label = "Q1", x = 37, y = 0), size = 3, angle = -45) +
-   geom_text(aes(label = "P2", x = 25, y = 45), size = 3, angle = -45) +
+   geom_text(aes(label = "P2", x = 0, y = 25), size = 3, angle = -45) +
    geom_text(aes(label = "P1", x = 0, y = 37.5), size = 3, angle = -45) +
    geom_segment(aes(x = 25,xend = 25,y = 0,yend=dem_2(25)), linetype = "dashed", size = 0.5) +
    geom_segment(aes(x=37.5,xend=37.5,y=0,yend=dem_us(37.5)), linetype = "dashed", size = 0.5) +
