@@ -1,0 +1,45 @@
+---
+title: "final paper figures"
+author: "Renee LaManna"
+date: "6/2/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(magrittr)
+library(kableExtra)
+library(ggplot2)
+library(here)
+library(janitor)
+library(cowplot)
+```
+
+
+```{r}
+sup <- function(x){
+  return(x)
+}
+
+dem_us <- function(x){
+  return(75-x)
+}
+
+price_world <- function(x){
+  return(25)
+}
+
+```
+
+
+```{r}
+ggplot() +
+  stat_function(fun = sup, color = "green") +
+  stat_function(fun = dem_us, color = "blue") +
+  stat_function(fun = price_world, color = "red")  +
+  xlim(0, 100) + ylim(0, 100) +
+  theme_minimal()
+```
+
