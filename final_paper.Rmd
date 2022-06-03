@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(magrittr)
-library(kableExtra)
 library(ggplot2)
 library(here)
 library(janitor)
@@ -19,8 +18,14 @@ library(cowplot)
 
 
 ```{r}
+#functions for country A w/ policy 
+
 sup <- function(x){
   return(x)
+}
+
+sup_1 <- function(x){
+  return(15+x)
 }
 
 dem_us <- function(x){
@@ -36,10 +41,70 @@ price_world <- function(x){
 
 ```{r}
 ggplot() +
-  stat_function(fun = sup, color = "green") +
-  stat_function(fun = dem_us, color = "blue") +
-  stat_function(fun = price_world, color = "red")  +
+  labs(x = "Quantity of Good",
+       y = "Price of Good ($/good)",
+       title = "Country A with Emission Reduction Policy (WILSON)") +
+  stat_function(fun = sup, color = "darkolivegreen4") +
+  stat_function(fun = sup_1, color = "darkolivegreen3") +
+  stat_function(fun = dem_us, color = "slateblue") +
+  stat_function(fun = price_world, color = "goldenrod")  +
   xlim(0, 100) + ylim(0, 100) +
-  theme_minimal()
+   geom_text(aes(label = "Q2", x = 30, y = 0), size = 3, angle = -45) +
+   geom_text(aes(label = "Q1", x = 37, y = 0), size = 3, angle = -45) +
+   geom_text(aes(label = "P12", x = 0, y = 45), size = 3, angle = -45) +
+   geom_text(aes(label = "P1", x = 0, y = 37.5), size = 3, angle = -45) +
+   geom_segment(aes(x=30,xend=30,y=0,yend=dem_us(30)), linetype = "dashed", size = 0.5) +
+   geom_segment(aes(x=37.5,xend=37.5,y=0,yend=dem_us(37.5)), linetype = "dashed", size = 0.5) +
+   geom_segment(aes(x=0,xend=37.5,y=dem_us(37.5),yend=dem_us(37.5)), linetype = "dashed", size = 0.5) +
+   geom_segment(aes(x=0,xend=30,y=dem_us(30),yend=dem_us(30)), linetype = "dashed", size = 0.5) +
+   geom_segment(aes(x = 54, y = 56, xend = 49, yend = 60),
+                  arrow = arrow(length = unit(0.2, "cm"))) + 
+   geom_segment(aes(x = 58, y = 61, xend = 53, yend = 65),
+                  arrow = arrow(length = unit(0.2, "cm"))) +
+ theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        axis.title = element_text(face = "bold"),
+        plot.caption = element_text(hjust = 1, face = "italic"))
 ```
+
+```{r}
+#functions for country B w/ tax
+
+sup <- function(x){
+  return(x)
+}
+
+dem_2 <- function(x){
+  return(50-x)
+}
+
+dem_us <- function(x){
+  return(75-x)
+}
+
+price_world <- function(x){
+  return(25)
+}
+
+```
+
+
+```{r}
+ggplot() +
+  labs(x = "Quantity of Good",
+       y = "Price of Good ($/good)",
+       title = "Country B with a Border Carbon Adjustment") +
+  stat_function(fun = sup, color = "darkolivegreen4") +
+  stat_function(fun = dem_2, color = "sienna") +
+  stat_function(fun = dem_us, color = "slateblue") +
+  stat_function(fun = price_world, color = "goldenrod")  +
+  xlim(0, 100) + ylim(0, 100) +
+ theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        axis.title = element_text(face = "bold"),
+        plot.caption = element_text(hjust = 1, face = "italic"))
+```
+
+
+
+
+
 
